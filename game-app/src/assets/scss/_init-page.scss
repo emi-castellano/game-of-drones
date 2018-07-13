@@ -1,0 +1,39 @@
+.init {
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    .register-step {
+        @include centerVH;
+        padding: 60px 80px;
+        text-align: center;
+        overflow: hidden;
+        h2 {
+            margin-bottom: 30px;
+        }
+        span {
+            display: block;
+            margin-bottom: 30px;
+        }
+        .input-wrapper {
+            margin-bottom: 30px;
+            label {
+                padding-right: 15px;
+            }
+            input {
+                text-transform: uppercase;
+                border: none;
+                border-bottom: 1px solid $black;
+                height: 30px;
+                font-family: Roboto-Regular;
+                font-size: 16px;
+                &:focus {
+                  outline: none;  
+                }
+            }
+        }
+        button {
+            margin-top: 20px;
+        }
+    }
+}

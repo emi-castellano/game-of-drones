@@ -1,0 +1,20 @@
+.winner {
+    .box {
+        padding: 30px 50px;
+        width: 40vw;
+        min-height: 320px;
+        @include centerVH;
+        text-align: center;
+        h1 {
+            margin-top: 50px;
+            font-size: 40px;
+        }
+        h4 {
+            font-size: 40px;
+            margin: 40px 0;
+        }
+        button {
+
+        }
+    }
+}
