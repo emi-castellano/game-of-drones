@@ -5,9 +5,10 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/game')
 
 var Player = require('./models/player');
+var GameResult = require('./models/gameResult');
 
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 var port = process.env.PORT || 8080;
 
@@ -15,6 +16,8 @@ var router = express.Router();
 
 router.use(function (req, res, next) {
     console.log('Something is happening');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
 
@@ -22,29 +25,83 @@ router.get('/', function (req, res) {
     res.json({ message: 'Welcome to my API' });
 });
 
+function getPlayer(name) {
+    return Player.findOne({ name: name }, 'name', function (err, player) {
+        if (err) return err;
+    });
+}
+
+async function insertPlayers(player1, player2, req, res) {
+    try {
+        let checkedPlayer1 = await getPlayer(player1.name);
+        let checkedPlayer2 = await getPlayer(player2.name);
+
+        if (checkedPlayer1 === null) {
+            player1.save(err => {
+                if (err) res.json({ response: 'INSERT_ERROR', message: 'An error has ocurred while creating a player' });
+            });
+            if (checkedPlayer2 === null) {
+                player2.save(err => {
+                    if (err) res.json({ response: 'INSERT_ERROR', message: 'An error has ocurred while creating a player' });
+                });
+            } else {
+                res.json({ response: 'REPEATED_PLAYER', message: 'The name ' + player2.name + ' already exists' });
+            }
+        } else {
+            res.json({ response: 'REPEATED_PLAYER', message: 'The name ' + player1.name + ' already exists' });
+        }
+
+        res.json({ response: 'PLAYERS_CREATED', message: 'Players created successfully.' });
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 router.route('/register-players')
     .post(function (req, res) {
-        var addedPlayers = 0;
-        var player1 = new Player();
+        let player1 = new Player();
         player1.name = req.body.player1;
-        var player2 = new Player();
+        let player2 = new Player();
         player2.name = req.body.player2;
 
-        player1.save(function (err) {
-            if (err)
-                res.send(err);
-            addedPlayers + 1;
-        });
-
-        player2.save(function (err) {
-            if (err)
-                res.send(err);
-            addedPlayers + 1;
-        });
-
-        res.json({ message: 'Players created', playersCreated: addedPlayers });
+        insertPlayers(player1, player2, req, res);
     });
+
+router.route('/set-winner')
+    .post(function (req, res) {
+        try {
+            let gameResult = new GameResult();
+            gameResult.winner = req.body.winner;
+
+            gameResult.save(err => {
+                if (err) res.json({ response: 'INSERT_ERROR', message: 'Couldnt add the game result' });
+            });
+            res.json({ response: 'WINNER_ADDED', message: 'The winner was successfully added.' });
+        } catch (err) {
+            console.log(err);
+        }
+    });
+
+router.get('/games-results', function (req, res) {
+    try {
+        let gameResults = new GameResult();
+
+        GameResult.aggregate([
+            {
+                $group: {
+                    _id: { winner : "$winner"},
+                    count: { $sum: 1 }
+                }
+            }
+        ]).then((data) => {
+            res.json({ results: data });
+        })
+    } catch (err) {
+        console.log(err);
+    }
+});
 
 app.use('/api', router);
 
 app.listen(port);
+console.log('Magic gappens on port' + port);

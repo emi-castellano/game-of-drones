@@ -27,9 +27,26 @@ class InitPage extends Component {
     }
 
     startGame = () => {
-        this.props.addPlayers([this.state.player1, this.state.player2]);
+        // Validate if the players names isn't blank or the same
         if (this.validatePlayersName()) {
-            this.props.history.push("/gameplay");
+            // Do the post to the NodeJS API in order to save the players
+            fetch('http://localhost:8080/api/register-players', {
+                method: 'POST',
+                body: JSON.stringify({
+                    player1: this.state.player1,
+                    player2: this.state.player2
+                }),
+                headers: { "Content-Type": "application/json" }
+            }).then((res) => res.json())
+                .then((data) => {
+                    // If the response has PLAYERS_CREATED is ok to continue
+                    if (data.response === 'PLAYERS_CREATED') {
+                        this.props.addPlayers([this.state.player1, this.state.player2]);
+                        this.props.history.push("/gameplay");
+                    } else if (data.response === 'REPEATED_PLAYER') {
+                        this.setState({ error: data.message, errorMessageClass: 'active' });
+                    }
+                });
         }
     }
 
@@ -42,7 +59,7 @@ class InitPage extends Component {
                 this.setState({ error: 'Please, enter two differents names for each player.', errorMessageClass: 'active' });
                 return false;
             } else {
-                this.setState({ error: '', errorMessageClass: ''});
+                this.setState({ error: '', errorMessageClass: '' });
                 return true;
             }
         }
