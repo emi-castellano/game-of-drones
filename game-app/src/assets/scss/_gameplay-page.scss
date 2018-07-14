@@ -1,7 +1,7 @@
 .gameplay {
     .round-content {
         padding: 30px 50px;
-        width: 50vw;
+        width: 65vw;
         min-height: 390px;
         @include centerVH;
         .center {
@@ -49,28 +49,29 @@
                 }
                 .score-list {
                     .list {
+                        padding: 0;
                         list-style: none;
                         li {
-                            margin-bottom: 10px;
-                            span.tag {
-                                color: $white;
-                                padding: 10px;
-                                font-family: Roboto-Light;
-                                border-radius: 3px;
-                                display: inline-block;
-                                width: 130px;
-                            }
-                            span.round {
-                                background-color: #E3423C;
-                            }
-                            span.winner {
-                                background-color: #069e43;
-                                color: $white;
-                            }
-                            i {
-                                position: relative;
-                                top: 7px;
-                                margin: 0 20px;
+                            margin: 10px 0;
+                            height: 40px;;
+                            .item {
+                                float: left;
+                                width: 50%;
+                                span.tag {
+                                    color: $white;
+                                    padding: 10px;
+                                    font-family: Roboto-Light;
+                                    border-radius: 3px;
+                                    display: inline-block;
+                                    width: 130px;
+                                }
+                                span.round {
+                                    background-color: #E3423C;
+                                }
+                                span.winner {
+                                    background-color: #069e43;
+                                    color: $white;
+                                }
                             }
                         }
                     }

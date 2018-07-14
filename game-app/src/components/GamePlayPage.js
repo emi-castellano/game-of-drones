@@ -127,11 +127,22 @@ class GamePlayPage extends Component {
               <h3>Score</h3>
               <div className="score-list">
                 <ul className="list">
+                  <li>
+                    <div className="item">
+                      <span>Round</span>
+                    </div>
+                    <div className="item">
+                      <span>Winner</span>
+                    </div>
+                  </li>
                   {this.state.roundWinner.map((item) =>
                     <li key={item.round} className="animated fadeInRight">
-                      <span className="tag round">Round {item.round}</span>
-                      <MaterialIcon icon="keyboard_arrow_right" color='#000' />
-                      <span className="tag winner">{item.winner === 'TIE' ? item.winner : 'Winner ' + item.winner.name}</span>
+                      <div className="item">
+                        <span className="tag round">{item.round}</span>
+                      </div>
+                      <div className="item">
+                        <span className="tag winner">{item.winner === 'TIE' ? item.winner : item.winner.name}</span>
+                      </div>                      
                     </li>
                   )}
                 </ul>

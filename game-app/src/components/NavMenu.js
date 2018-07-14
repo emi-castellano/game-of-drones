@@ -9,7 +9,7 @@ const NavMenu = (props) => {
                     <Link to="/">Home</Link>
                 </li>
                 <li>
-                    <Link to="/stadistics">Leaderboard</Link>
+                    <Link to="/leaderboard">Leaderboard</Link>
                 </li>
                 <li>
                     <Link to="/">Game Configuration</Link>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NavMenu from './NavMenu';
 
-class StadisticsPage extends Component {
+class LeaderboardPage extends Component {
 
     constructor(props) {
         super(props);
@@ -48,4 +48,4 @@ class StadisticsPage extends Component {
     }
 }
 
-export default StadisticsPage;
+export default LeaderboardPage;
