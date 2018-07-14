@@ -12,7 +12,9 @@ class WinnerPage extends Component {
             request: false
         }
         this.winnerSound = new Audio(audio);
-        this.saveTheWinner();
+
+        this.checkIfTheGameHasToRestart();
+        this.saveGameResults();
     }
 
     render() {
@@ -20,27 +22,30 @@ class WinnerPage extends Component {
             <div className="content winner">
                 <div className="card final box">
                     <h1>We have a winner!</h1>
-                    <h4>{this.props.gameState.winner} is the new emperor!</h4>
+                    <h4>{this.props.gameState.players.length > 0 ? this.props.gameState.results.winnerPlayer.name : ''} is the new emperor!</h4>
                     <button onClick={this.props.resetGame} className="primary-btn" disabled={!this.state.request}>Play Again</button>
                 </div>
             </div>
         );
     }
 
-    saveTheWinner() {
-        fetch('http://localhost:8080/api/set-winner', {
-            method: 'POST',
-            body: JSON.stringify({
-                winner: this.props.gameState.winner
-            }),
-            headers: { "Content-Type": "application/json" }
-        }).then((res) => res.json())
-            .then((data) => {
-                // If the response has WINNER_ADDED is ok to continue
-                if (data.response === 'WINNER_ADDED') {
-                    this.setState({request: true});
-                }
-            });
+    saveGameResults() {
+        if (this.props.gameState.players.length > 0) {
+            fetch('http://localhost:8080/api/set-results', {
+                method: 'POST',
+                body: JSON.stringify({
+                    winner: this.props.gameState.results.winnerPlayer.name,
+                    loser: this.props.gameState.results.loserPlayer.name
+                }),
+                headers: { "Content-Type": "application/json" }
+            }).then((res) => res.json())
+                .then((data) => {
+                    // If the response has RESULTS_ADDED is ok to continue
+                    if (data.response === 'RESULTS_ADDED') {
+                        this.setState({ request: true });
+                    }
+                });
+        }
     }
 
     componentDidMount() {
@@ -53,7 +58,7 @@ class WinnerPage extends Component {
     }
 
     checkIfTheGameHasToRestart() {
-        if (this.props.gameState.winner === '') {
+        if (this.props.gameState.players.length === 0) {
             this.props.history.push("/");
         }
     }

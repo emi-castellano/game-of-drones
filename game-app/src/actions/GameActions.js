@@ -1,4 +1,4 @@
-import { ADD_PLAYERS, SCORE_UP, SET_WINNER, RESET_GAME } from './types';
+import { ADD_PLAYERS, SCORE_UP, SET_RESULTS, RESET_GAME } from './types';
 
 export const addPlayers = (players) => dispatch => {
     dispatch({
@@ -18,11 +18,11 @@ export const scoreUp = (player) => dispatch => {
     })
 }
 
-export const setWinner = (player) => dispatch => {
+export const setGameResults = (playerResults) => dispatch => {
     dispatch({
-        type: SET_WINNER,
+        type: SET_RESULTS,
         payload: {
-            gameWinner: player
+            gameResults: playerResults
         }
     })
 }

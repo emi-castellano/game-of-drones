@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from "react-router-dom";
+import NavMenu from './NavMenu';
 
 class StadisticsPage extends Component {
 
@@ -13,10 +13,27 @@ class StadisticsPage extends Component {
     render() {
         return (
             <div className="content game-results">
+                <NavMenu />
                 <div className="card stadistics">
-                    {this.state.results.map((item, index) =>
-                        <p key={index}>{item._id.winner + item.count}</p>
-                    )}
+                    {this.state.results.length > 0 &&
+                        <div>
+                            <h2>Leaderboard</h2>
+                            <ul className="list">
+                                {this.state.results.map((item, index) =>
+                                    <li key={index}>
+                                        <div className="position">
+                                            <span>{index + 1}</span>
+                                        </div>
+                                        <span className="player">{item._id.player}</span>
+                                        <span>Wins: {item.count}</span>
+                                    </li>
+                                )}
+                            </ul>
+                        </div>
+                    }
+                    {this.state.results.length === 0 &&
+                        <h2>No game results saved yet.</h2>
+                    }
                 </div>
             </div>
         );
@@ -31,4 +48,4 @@ class StadisticsPage extends Component {
     }
 }
 
-export default (withRouter(StadisticsPage));
+export default StadisticsPage;

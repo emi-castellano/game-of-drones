@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
-import { scoreUp, setWinner } from '../actions/GameActions';
+import { scoreUp, setGameResults } from '../actions/GameActions';
 import MaterialIcon from 'material-icons-react';
 
 class GamePlayPage extends Component {
@@ -82,8 +82,9 @@ class GamePlayPage extends Component {
 
   componentDidUpdate() {
     const winner = this.props.gameState.players.find((player) => { return player.score === 3 })
+    const loser = this.props.gameState.players.find((player) => { return player.score < 3 })
     if (winner !== undefined) {
-      this.props.setWinner(winner.name);
+      this.props.setGameResults({winnerPlayer: winner, loserPlayer: loser});
       this.props.history.push("/results")
     }
   }
@@ -147,4 +148,4 @@ const mapStateToProps = state => ({
   gameState: state.gameState
 });
 
-export default connect(mapStateToProps, { scoreUp, setWinner })(withRouter(GamePlayPage));
+export default connect(mapStateToProps, { scoreUp, setGameResults })(withRouter(GamePlayPage));

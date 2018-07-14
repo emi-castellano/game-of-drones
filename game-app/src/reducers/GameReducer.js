@@ -1,8 +1,8 @@
-import { ADD_PLAYERS, SCORE_UP, SET_WINNER, RESET_GAME } from '../actions/types';
+import { ADD_PLAYERS, SCORE_UP, SET_RESULTS, RESET_GAME } from '../actions/types';
 
 const initialState = {
   players: [],
-  winner: ''
+  results: {}
 }
 
 export default function (state = initialState, action) {
@@ -19,8 +19,8 @@ export default function (state = initialState, action) {
         return { ...player }
       });
       return { ...state, players: gamePlayers }
-    case SET_WINNER:
-      return { ...state, winner: action.payload.gameWinner }
+    case SET_RESULTS:
+      return { ...state, results: action.payload.gameResults }
     case RESET_GAME:
       return initialState;
     default:

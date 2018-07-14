@@ -67,16 +67,19 @@ router.route('/register-players')
         insertPlayers(player1, player2, req, res);
     });
 
-router.route('/set-winner')
+router.route('/set-results')
     .post(function (req, res) {
         try {
-            let gameResult = new GameResult();
-            gameResult.winner = req.body.winner;
+            var gameResults = [
+                { result: false, player: req.body.loser },
+                { result: true, player: req.body.winner },
+            ]
 
-            gameResult.save(err => {
+            GameResult.collection.insert(gameResults, (err, docs) => {
                 if (err) res.json({ response: 'INSERT_ERROR', message: 'Couldnt add the game result' });
             });
-            res.json({ response: 'WINNER_ADDED', message: 'The winner was successfully added.' });
+        
+            res.json({ response: 'RESULTS_ADDED', message: 'The results were saved successfully.' });
         } catch (err) {
             console.log(err);
         }
@@ -84,13 +87,23 @@ router.route('/set-winner')
 
 router.get('/games-results', function (req, res) {
     try {
-        let gameResults = new GameResult();
-
         GameResult.aggregate([
             {
+                $match: {
+                    result: true
+                },
+            },
+            {
                 $group: {
-                    _id: { winner : "$winner"},
+                    _id: { 
+                        player : "$player" 
+                    },
                     count: { $sum: 1 }
+                }
+            },
+            {
+                $sort: {
+                    count: -1
                 }
             }
         ]).then((data) => {

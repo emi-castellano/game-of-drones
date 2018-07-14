@@ -77,6 +77,23 @@ h1, h2, h3, h4, h5, h6 {
     list-style: none;
     margin-top: 40px; }
 
+.nav-menu {
+  position: absolute;
+  right: 30px;
+  top: 30px; }
+  .nav-menu ul {
+    margin: 0;
+    list-style: none; }
+    .nav-menu ul li {
+      margin-right: 30px;
+      display: inline-block; }
+      .nav-menu ul li a {
+        color: #fff;
+        font-family: Roboto-Bold;
+        letter-spacing: 0.5px;
+        font-size: 17px;
+        text-decoration: none; }
+
 .init {
   height: 100vh;
   background-size: cover;
@@ -223,5 +240,28 @@ h1, h2, h3, h4, h5, h6 {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 60px 80px; }
+  .stadistics ul {
+    list-style: none;
+    margin: 40px 0 0 0;
+    padding: 0 30px;
+    max-height: 500px;
+    overflow-y: scroll; }
+    .stadistics ul li {
+      margin-bottom: 20px; }
+      .stadistics ul li .position {
+        background-color: #B00020;
+        border-radius: 50px;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        display: inline-block;
+        margin-right: 30px; }
+        .stadistics ul li .position span {
+          line-height: 30px;
+          color: #fff; }
+      .stadistics ul li .player {
+        width: 200px;
+        display: inline-block;
+        margin-right: 30px; }
 
 /*# sourceMappingURL=main.css.map */

@@ -105,3 +105,24 @@ h1, h2, h3, h4, h5, h6 {
          margin-top: 40px;
      }
  }
+
+ .nav-menu {
+     position: absolute;
+     right: 30px;
+     top: 30px;
+     ul {
+         margin: 0;
+         list-style: none;
+         li {
+             margin-right: 30px;
+             display: inline-block;
+             a { 
+                color: $white;
+                font-family: Roboto-Bold;
+                letter-spacing: 0.5px;
+                font-size: 17px;
+                text-decoration: none;
+             }
+         }
+     }
+ }

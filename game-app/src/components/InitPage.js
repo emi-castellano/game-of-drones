@@ -5,6 +5,7 @@ import { addPlayers } from '../actions/GameActions';
 import MaterialIcon from 'material-icons-react';
 import ToastMessage from './ToastMessage';
 import ConfigModal from './ConfigModal';
+import NavMenu from './NavMenu';
 
 class InitPage extends Component {
 
@@ -68,6 +69,7 @@ class InitPage extends Component {
     render() {
         return (
             <div className="content init">
+                <NavMenu />
                 <div className="card register-step">
                     <div className="form-box">
                         <h2>Welcome to Game of Drones</h2>
