@@ -11,8 +11,8 @@ const initialState = {
 export default function (state = initialState, action) {
     switch (action.type) {
         case ADD_MOVE:
-            state.moves.push(action.payload.move);
-            console.log(state);
+            return [...state.moves, action.payload.move];
+            break;
         case UPDATE_MOVE:
             const { move, kill } = action.payload;
             const moves = state.moves.map(moveItem => {
@@ -23,7 +23,9 @@ export default function (state = initialState, action) {
             });
 
             return {...state, moves}
+            break;
         default:
             return state;
+            break;
     }
 }

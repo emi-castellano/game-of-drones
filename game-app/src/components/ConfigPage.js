@@ -29,8 +29,12 @@ class ConfigPage extends Component {
 
     renderModal = () => {
         if (this.state.showModal) {
-            return <NewMoveModal />
-        }        
+            return <NewMoveModal closeModal={this.closeModal}/>
+        }
+    }
+    
+    closeModal = () => {
+        this.setState({ showModal: false });
     }
 
     changeModalVisibility = () => {
@@ -45,7 +49,7 @@ class ConfigPage extends Component {
                 {this.renderModal()}
                 <div className="card config">
                     <h3>Games rules configuration</h3>
-                    <button onClick={this.changeModalVisibility}>ADD MOVE</button>
+                    <button className="add-move primary-btn" onClick={this.changeModalVisibility}>ADD MOVE</button>
                     <ul>
                         {moves.map((item, index) =>
                             <li key={index}>
@@ -53,7 +57,7 @@ class ConfigPage extends Component {
                                 <input type="text" defaultValue={item.move} disabled />
 
                                 <label>Kills</label>
-                                <SuggestionInput selectSuggestion={this.changeMove} move={item.move} value={item.kills} action={'add'} />
+                                <SuggestionInput selectSuggestion={this.changeMove} move={item.move} action={"update"} value={item.kills} />
                             </li>
                         )}
                     </ul>

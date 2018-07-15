@@ -10,6 +10,7 @@ export default function (state = initialState, action) {
     case ADD_PLAYERS:
       const players = action.payload.players.map(player => ({ name: player, score: 0 }));
       return { ...state, players }
+      break;
     case SCORE_UP:
       const winner = action.payload.roundWinner;
       const gamePlayers = state.players.map(player => {
@@ -19,11 +20,15 @@ export default function (state = initialState, action) {
         return { ...player }
       });
       return { ...state, players: gamePlayers }
+      break;
     case SET_RESULTS:
       return { ...state, results: action.payload.gameResults }
+      break;
     case RESET_GAME:
       return initialState;
+      break;
     default:
       return state;
+      break;
   }
 }
