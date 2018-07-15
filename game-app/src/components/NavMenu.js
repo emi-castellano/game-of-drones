@@ -12,7 +12,7 @@ const NavMenu = (props) => {
                     <Link to="/leaderboard">Leaderboard</Link>
                 </li>
                 <li>
-                    <Link to="/">Game Configuration</Link>
+                    <Link to="/configuration">Game Configuration</Link>
                 </li>
             </ul>
         </div>

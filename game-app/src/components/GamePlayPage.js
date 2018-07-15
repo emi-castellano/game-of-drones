@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import { scoreUp, setGameResults } from '../actions/GameActions';
-import MaterialIcon from 'material-icons-react';
 
 class GamePlayPage extends Component {
 
@@ -98,11 +97,7 @@ class GamePlayPage extends Component {
       playerMoves: [],
       roundWinner: [],
       players: this.props.gameState.players,
-      moves: [
-        { move: "paper", kills: "rock" },
-        { move: "rock", kills: "scissors" },
-        { move: "scissors", kills: "paper" }
-      ],
+      moves: this.props.moveState.moves,
       selectedMove: 'default'
     }
   }
@@ -155,8 +150,6 @@ class GamePlayPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  gameState: state.gameState
-});
+const mapStateToProps = ({ gameState, moveState }) => ({ gameState, moveState });
 
 export default connect(mapStateToProps, { scoreUp, setGameResults })(withRouter(GamePlayPage));

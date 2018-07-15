@@ -93,19 +93,6 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
- .modal {
-     display: none;
-     background-color: $white;
-     @include centerVH();
-     width: 50vw;
-     min-height: 600px;
-     padding: 50px;
-     ul {
-         list-style: none;
-         margin-top: 40px;
-     }
- }
-
  .nav-menu {
      position: absolute;
      right: 30px;

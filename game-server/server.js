@@ -44,11 +44,7 @@ async function insertPlayers(player1, player2, req, res) {
                 player2.save(err => {
                     if (err) res.json({ response: 'INSERT_ERROR', message: 'An error has ocurred while creating a player' });
                 });
-            } else {
-                res.json({ response: 'REPEATED_PLAYER', message: 'The name ' + player2.name + ' already exists' });
             }
-        } else {
-            res.json({ response: 'REPEATED_PLAYER', message: 'The name ' + player1.name + ' already exists' });
         }
 
         res.json({ response: 'PLAYERS_CREATED', message: 'Players created successfully.' });
@@ -117,4 +113,4 @@ router.get('/games-results', function (req, res) {
 app.use('/api', router);
 
 app.listen(port);
-console.log('Magic gappens on port' + port);
+console.log('Magic happens on port ' + port);

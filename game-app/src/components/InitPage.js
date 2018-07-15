@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { addPlayers } from '../actions/GameActions';
 import MaterialIcon from 'material-icons-react';
 import ToastMessage from './ToastMessage';
-import ConfigModal from './ConfigModal';
 import NavMenu from './NavMenu';
 
 class InitPage extends Component {
@@ -44,8 +43,6 @@ class InitPage extends Component {
                     if (data.response === 'PLAYERS_CREATED') {
                         this.props.addPlayers([this.state.player1, this.state.player2]);
                         this.props.history.push("/gameplay");
-                    } else if (data.response === 'REPEATED_PLAYER') {
-                        this.setState({ error: data.message, errorMessageClass: 'active' });
                     }
                 });
         }
@@ -89,14 +86,11 @@ class InitPage extends Component {
                     </div>
                     <ToastMessage class={this.state.errorMessageClass} message={this.state.error} />
                 </div>
-                <ConfigModal />
             </div>
         );
     }
 }
 
-const mapStateToProps = state => ({
-    gameState: state.gameState
-});
+const mapStateToProps = ({ gameState }) => ({ gameState });
 
 export default connect(mapStateToProps, { addPlayers })(withRouter(InitPage));
