@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import closeIcon from '../assets/images/close-icon.svg';
-import SuggestionInput from './SuggestionInput';
-import { addMove } from '../actions/MovesActions';
+import closeIcon from '../../assets/images/close-icon.svg';
+import SuggestionInput from '../containers/SuggestionInput';
+import { addMove } from '../../actions/MovesActions';
+import PropTypes from 'prop-types';
 
 class NewMoveModal extends Component {
 
@@ -28,21 +29,16 @@ class NewMoveModal extends Component {
         let move = this.props.moveState.moves.find((move) => { return move.move === this.state.move });
         // Check if the kill is a existing move
         let kill = this.props.moveState.moves.find((move) => { return move.kills === this.state.kill });
-
-        if (move !== undefined) {
-            this.setState({error: "Can't add an already saved move."})
-        }
-        if (kill === undefined) {
-            this.setState({error: "Kill value must be an existing move."})
-        }
-
-        if (this.state.kill === this.state.move) {
-            this.setState({error: "Can't add a move with the same values."})
-        }
-        
-        if (this.state.error === '') {
-            this.props.addMove({ move: this.state.move, kills: this.state.kill });
-            this.props.closeModal();
+        console.log(move);
+        if (move !== undefined || kill === undefined) {
+            this.setState({error: "Be sure to add a unexisting move."})
+        } else {
+            if (this.state.kill === this.state.move) {
+                this.setState({error: "Can't add a move with the same values."})
+            } else {
+                this.props.addMove({ move: this.state.move, kills: this.state.kill });
+                this.props.closeModal();
+            }
         }
     }
 
@@ -69,5 +65,11 @@ class NewMoveModal extends Component {
 }
 
 const mapStateToProps = ({ moveState }) => ({ moveState });
+
+NewMoveModal.propTypes = {
+    moveState: PropTypes.object.isRequired,
+    closeModal: PropTypes.func.isRequired,
+    addMove: PropTypes.func.isRequired,
+}
 
 export default connect(mapStateToProps, { addMove })((NewMoveModal));

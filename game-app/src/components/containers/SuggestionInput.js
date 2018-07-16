@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class SuggestionInput extends Component {
 
@@ -59,5 +60,12 @@ class SuggestionInput extends Component {
 }
 
 const mapStateToProps = ({ moveState }) => ({ moveState });
+
+SuggestionInput.propTypes = {
+    move: PropTypes.string,
+    action: PropTypes.string.isRequired,
+    selectSuggestion: PropTypes.func.isRequired,
+    value: PropTypes.string
+}
 
 export default connect(mapStateToProps, null)(SuggestionInput);

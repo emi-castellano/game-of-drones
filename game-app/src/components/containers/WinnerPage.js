@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
-import { resetGame } from '../actions/GameActions';
-import audio from '../assets/sounds/winner.mp3';
+import { resetGame } from '../../actions/GameActions';
+import audio from '../../assets/sounds/winner.mp3';
+import PropTypes from 'prop-types';
 
 class WinnerPage extends Component {
 
@@ -67,5 +68,11 @@ class WinnerPage extends Component {
 const mapStateToProps = state => ({
     gameState: state.gameState
 });
+
+WinnerPage.propTypes = {
+    gameState: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
+    resetGame: PropTypes.func.isRequired
+}
 
 export default connect(mapStateToProps, { resetGame })(withRouter(WinnerPage));

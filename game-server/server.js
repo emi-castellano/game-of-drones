@@ -21,10 +21,6 @@ router.use(function (req, res, next) {
     next();
 });
 
-router.get('/', function (req, res) {
-    res.json({ message: 'Welcome to my API' });
-});
-
 function getPlayer(name) {
     return Player.findOne({ name: name }, 'name', function (err, player) {
         if (err) return err;

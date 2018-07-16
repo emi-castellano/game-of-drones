@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
-import { addPlayers } from '../actions/GameActions';
+import { addPlayers } from '../../actions/GameActions';
 import MaterialIcon from 'material-icons-react';
-import ToastMessage from './ToastMessage';
-import NavMenu from './NavMenu';
+import ToastMessage from '../ToastMessage';
+import NavMenu from '../NavMenu';
+import PropTypes from 'prop-types';
 
 class InitPage extends Component {
 
@@ -92,5 +93,10 @@ class InitPage extends Component {
 }
 
 const mapStateToProps = ({ gameState }) => ({ gameState });
+
+InitPage.PropTypes = {
+    addPlayers: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired
+}
 
 export default connect(mapStateToProps, { addPlayers })(withRouter(InitPage));

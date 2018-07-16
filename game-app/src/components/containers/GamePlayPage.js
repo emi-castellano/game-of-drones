@@ -1,9 +1,24 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
-import { scoreUp, setGameResults } from '../actions/GameActions';
+import { scoreUp, setGameResults } from '../../actions/GameActions';
+import PropTypes from 'prop-types';
 
 class GamePlayPage extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentRound: 1,
+      currentTurn: 0,
+      playerMoves: [],
+      roundWinner: [],
+      players: this.props.gameState.players,
+      moves: this.props.moveState.moves,
+      selectedMove: 'default'
+    }
+  }
 
   makeMove = () => {
     // Check if the selected move isn't the default one
@@ -88,20 +103,6 @@ class GamePlayPage extends Component {
     }
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      currentRound: 1,
-      currentTurn: 0,
-      playerMoves: [],
-      roundWinner: [],
-      players: this.props.gameState.players,
-      moves: this.props.moveState.moves,
-      selectedMove: 'default'
-    }
-  }
-
   render() {
     return (
       <div className="content gameplay">
@@ -151,5 +152,13 @@ class GamePlayPage extends Component {
 }
 
 const mapStateToProps = ({ gameState, moveState }) => ({ gameState, moveState });
+
+GamePlayPage.propTypes = {
+  setGameResults: PropTypes.func.isRequired,
+  scoreUp: PropTypes.func.isRequired,
+  gameState: PropTypes.object.isRequired,
+  moveState: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
+};
 
 export default connect(mapStateToProps, { scoreUp, setGameResults })(withRouter(GamePlayPage));

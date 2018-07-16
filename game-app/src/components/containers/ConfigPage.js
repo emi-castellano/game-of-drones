@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
-import NavMenu from './NavMenu';
-import SuggestionInput from './SuggestionInput';
-import { updateMove } from '../actions/MovesActions';
-import NewMoveModal from './NewMoveModal';
+import NavMenu from '../NavMenu';
+import SuggestionInput from '../containers/SuggestionInput';
+import { updateMove } from '../../actions/MovesActions';
+import NewMoveModal from '../containers/NewMoveModal';
+import PropTypes from 'prop-types';
 
 class ConfigPage extends Component {
 
@@ -66,6 +67,11 @@ class ConfigPage extends Component {
         );
     }
 }
+
+ConfigPage.propTypes = {
+    updateMove: PropTypes.func.isRequired,
+    moveState: PropTypes.object.isRequired
+};
 
 const mapStateToProps = ({ moveState }) => ({ moveState });
 

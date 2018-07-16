@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom'
-import InitPage from './components/InitPage';
-import GamePlayPage from './components/GamePlayPage';
-import WinnerPage from './components/WinnerPage';
+import InitPage from './components/containers/InitPage';
+import GamePlayPage from './components/containers/GamePlayPage';
+import WinnerPage from './components/containers/WinnerPage';
 import LeaderboardPage from './components/LeaderboardPage';
-import ConfigPage from './components/ConfigPage';
+import ConfigPage from './components/containers/ConfigPage';
 import { Provider } from 'react-redux';
 import store from './store';
 import './assets/css/main.css';

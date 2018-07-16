@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 
-const NavMenu = (props) => {
+const NavMenu = () => {
     return (
         <div className="nav-menu">
             <ul>
