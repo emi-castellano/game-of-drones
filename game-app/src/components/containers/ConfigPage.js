@@ -43,7 +43,6 @@ class ConfigPage extends Component {
     }
 
     render() {
-        const { moves } = this.state;
         return (
             <div className="content">
                 <NavMenu />
@@ -52,7 +51,7 @@ class ConfigPage extends Component {
                     <h3>Games rules configuration</h3>
                     <button className="add-move primary-btn" onClick={this.changeModalVisibility}>ADD MOVE</button>
                     <ul>
-                        {moves.map((item, index) =>
+                        {this.props.moveState.moves.map((item, index) =>
                             <li key={index}>
                                 <label>Move</label>
                                 <input type="text" defaultValue={item.move} disabled />
