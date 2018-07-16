@@ -9,6 +9,16 @@ export const addPlayers = (players) => dispatch => {
     })
 }
 
+// ADD_PLAYER action for test
+export const addPlayersTest = (players) => {
+    return {
+        type: ADD_PLAYERS,
+        payload: {
+            players
+        }
+    }
+}
+
 export const scoreUp = (player) => dispatch => {
     dispatch({
         type: SCORE_UP,
@@ -16,6 +26,16 @@ export const scoreUp = (player) => dispatch => {
             roundWinner: player
         }
     })
+}
+
+// SCORE_UP action for test
+export const scoreUpTest = (player) => {
+    return {
+        type: SCORE_UP,
+        payload: {
+            roundWinner: player
+        }
+    }
 }
 
 export const setGameResults = (playerResults) => dispatch => {
@@ -27,6 +47,16 @@ export const setGameResults = (playerResults) => dispatch => {
     })
 }
 
+// SET_RESULTS action for test
+export const setGameResultsTest = (playerResults) => {
+    return {
+        type: SET_RESULTS,
+        payload: {
+            gameResults: playerResults
+        }
+    }
+}
+
 export const resetGame = () => dispatch => {
     dispatch({
         type: RESET_GAME,
@@ -35,4 +65,15 @@ export const resetGame = () => dispatch => {
             winner: ''
         }
     })
+}
+
+// RESET_GAME action for test
+export const resetGameTest = () => {
+    return {
+        type: RESET_GAME,
+        payload: {
+            players: [],
+            winner: ''
+        }
+    }
 }

@@ -10,6 +10,16 @@ export const updateMove = (move, kill) => dispatch => {
     })
 }
 
+export const updateMoveTest = (move, kill) => {
+    return {
+        type: UPDATE_MOVE,
+        payload: {
+            move,
+            kill
+        }
+    }
+}
+
 export const addMove = (move) => dispatch => {
     dispatch({
         type: ADD_MOVE,
@@ -17,4 +27,13 @@ export const addMove = (move) => dispatch => {
             move: move
         }
     })
+}
+
+export const addMoveTest = (move) => {
+    return {
+        type: ADD_MOVE,
+        payload: {
+            move: move
+        }
+    }
 }
