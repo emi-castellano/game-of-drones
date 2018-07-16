@@ -1,11 +1,11 @@
 import { ADD_MOVE, UPDATE_MOVE } from '../actions/types';
 
-export const updateMove = (move, kill) => dispatch => {
+export const updateMove = (move, kills) => dispatch => {
     dispatch({
         type: UPDATE_MOVE,
         payload: {
             move,
-            kill
+            kills
         }
     })
 }

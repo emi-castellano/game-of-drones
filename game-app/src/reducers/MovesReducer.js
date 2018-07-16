@@ -16,10 +16,10 @@ export default function (state = initialState, action) {
             }
             break;
         case UPDATE_MOVE:
-            const { move, kill } = action.payload;
+            const { move, kills } = action.payload;
             const moves = state.moves.map(moveItem => {
                 if (moveItem.move === move) {
-                    return { move, kill }
+                    return { move, kills }
                 }
                 return { ...moveItem }
             });

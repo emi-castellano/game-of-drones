@@ -20,8 +20,8 @@ class ConfigPage extends Component {
         }
     }
 
-    changeMove = (move, kill) => {
-        this.props.updateMove(move, kill);
+    changeMove = (move, kills) => {
+        this.props.updateMove(move, kills);
     }
 
     addNewMoveRow = () => {
@@ -50,7 +50,7 @@ class ConfigPage extends Component {
                 <div className="card config">
                     <h3>Games rules configuration</h3>
                     <button className="add-move primary-btn" onClick={this.changeModalVisibility}>ADD MOVE</button>
-                    <ul>
+                    <ul className="all-moves">
                         {this.props.moveState.moves.map((item, index) =>
                             <li key={index}>
                                 <label>Move</label>

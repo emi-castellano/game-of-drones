@@ -15,10 +15,7 @@ describe('actions', () => {
 
     expect(gameActions.addPlayersTest(players)).toEqual(expectedAction);
   })
-});
-
-// SCORE_UP action test
-describe('actions', () => {
+  // SCORE_UP action test
   it('Should add one more score to the current score of a player.', () => {
     const winnerPlayer = 'PlayerName';
 
@@ -30,11 +27,8 @@ describe('actions', () => {
     }
 
     expect(gameActions.scoreUpTest(winnerPlayer)).toEqual(expectedAction);
-  })
-});
-
-// SET_RESULTS action test
-describe('actions', () => {
+  });
+  // SET_RESULTS action test
   it('Should show the who wins and who loose the game.', () => {
     const gameResults = {
       winnerPlayer: { name: 'WinnerPlayerName', score: 3 },
@@ -49,11 +43,8 @@ describe('actions', () => {
     };
 
     expect(gameActions.setGameResultsTest(gameResults)).toEqual(expectedAction);
-  })
-});
-
-// RESET_GAME action test
-describe('actions', () => {
+  });
+  // RESET_GAME action test
   it('Should reset the game to the initial state', () => {
     const gameInitialState = {
       players: [],
@@ -69,5 +60,5 @@ describe('actions', () => {
     };
 
     expect(gameActions.resetGameTest()).toEqual(expectedAction);
-  })
+  });
 });
