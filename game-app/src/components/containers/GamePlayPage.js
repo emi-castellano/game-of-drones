@@ -14,7 +14,6 @@ class GamePlayPage extends Component {
       currentTurn: 0,
       playerMoves: [],
       roundWinner: [],
-      players: this.props.gameState.players,
       moves: this.props.moveState.moves,
       selectedMove: 'default'
     }
@@ -41,8 +40,8 @@ class GamePlayPage extends Component {
 
   getRoundWinner = () => {
     // Get player moves
-    let player1Move = this.state.moves.find((move) => { return move.move === this.state.playerMoves[0] });
-    let player2Move = this.state.moves.find((move) => { return move.move === this.state.playerMoves[1] });
+    let player1Move = this.props.moveState.moves.find((move) => { return move.move === this.state.playerMoves[0] });
+    let player2Move = this.props.moveState.moves.find((move) => { return move.move === this.state.playerMoves[1] });
 
     if (player1Move.kills === player2Move.move) {
       // Player 1 wins
@@ -50,22 +49,22 @@ class GamePlayPage extends Component {
         {
           roundWinner: [...this.state.roundWinner, {
             round: this.state.currentRound,
-            winner: this.state.players[0]
+            winner: this.props.gameState.players[0]
           }]
         }
       );
-      this.props.scoreUp(this.state.players[0].name);
+      this.props.scoreUp(this.props.gameState.players[0].name);
     } else if (player2Move.kills === player1Move.move) {
       // Player 2 wins
       this.setState(
         {
           roundWinner: [...this.state.roundWinner, {
             round: this.state.currentRound,
-            winner: this.state.players[1]
+            winner: this.props.gameState.players[1]
           }]
         }
       );
-      this.props.scoreUp(this.state.players[1].name)
+      this.props.scoreUp(this.props.gameState.players[1].name)
     } else {
       // Tie
       this.setState(
@@ -110,10 +109,10 @@ class GamePlayPage extends Component {
           <div className="center">
             <div className="plays">
               <h2>Round {this.state.currentRound}</h2>
-              <h4>Player turn: {this.state.players.length > 0 ? <span>{this.state.players[this.state.currentTurn].name}</span> : ''}</h4>
+              <h4>Player turn: <span>{this.props.gameState.players[this.state.currentTurn].name}</span></h4>
               <select onChange={this.pickMove} value={this.state.selectedMove}>
                 <option value="default">Select move</option>
-                {this.state.moves.map((move) =>
+                {this.props.moveState.moves.map((move) =>
                   <option key={move.move} value={move.move}>{move.move}</option>
                 )}
               </select>
